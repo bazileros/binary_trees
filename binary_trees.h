@@ -1,6 +1,7 @@
 #ifndef BINARY_TREES_H
 #define BINARY_TREES_H
 
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -26,11 +27,27 @@ struct binary_tree_s
 	struct binary_tree_s *right;
 };
 
-/* Create a node tree struct */
+/**
+ * struct levelorder_queue_s - Levelorder traversal queue
+ * @node: Pointer to the node
+ * @next: Pointer to the next node in the queue
+ *
+ * Return: Nothing
+ * Description: Levelorder traversal queue
+*/
+typedef struct levelorder_queue_s
+{
+	binary_tree_t *node;
+	struct levelorder_queue_s *next;
+} levelorder_queue_t;
+
+
 typedef struct binary_tree_s binary_tree_t;
 typedef struct binary_tree_s bst_t;
 typedef struct binary_tree_s avl_t;
 typedef struct binary_tree_s heap_t;
+/*Prints a binary tree*/
+void binary_tree_print(const binary_tree_t *tree);
 
 /*Creates a binary tree node*/
 binary_tree_t *binary_tree_node(binary_tree_t *parent, int value);
@@ -46,9 +63,9 @@ int binary_tree_is_leaf(const binary_tree_t *node);
 int binary_tree_is_root(const binary_tree_t *node);
 /*Checks if a binary tree is empty*/
 void binary_tree_preorder(const binary_tree_t *tree, void (*func)(int));
-/*Checks if a binary tree is full*/
+/* Tranverses through a binary tree in pre-order*/
 void binary_tree_inorder(const binary_tree_t *tree, void (*func)(int));
-/*Checks if a binary tree is full*/
+/* Transverses through a binary tree in in-order */
 void binary_tree_postorder(const binary_tree_t *tree, void (*func)(int));
 size_t binary_tree_height(const binary_tree_t *tree);
 /*Checks if two trees are identical*/
@@ -90,6 +107,5 @@ heap_t *heap_insert(heap_t **root, int value);
 heap_t *array_to_heap(int *array, size_t size);
 int heap_extract(heap_t **root);
 int *heap_to_sorted_array(heap_t *heap, size_t *size);
-void binary_tree_print(const binary_tree_t *tree);
 
 #endif
